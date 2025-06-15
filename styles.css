@@ -1,0 +1,345 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+}
+
+.stopwatch-container {
+    background: white;
+    border-radius: 25px;
+    padding: 2.5rem;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+h1 {
+    color: #4a5568;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+.time-display {
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.time {
+    font-size: 4rem;
+    font-weight: 300;
+    color: #2d3748;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 3px;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.time-labels {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    font-size: 0.9rem;
+    color: #718096;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 120px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #48bb78, #38a169);
+    color: white;
+    box-shadow: 0 4px 15px rgba(72, 187, 120, 0.4);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(72, 187, 120, 0.6);
+}
+
+.btn-primary.stop {
+    background: linear-gradient(135deg, #f56565, #e53e3e);
+    box-shadow: 0 4px 15px rgba(245, 101, 101, 0.4);
+}
+
+.btn-primary.stop:hover {
+    box-shadow: 0 6px 20px rgba(245, 101, 101, 0.6);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #4299e1, #3182ce);
+    color: white;
+    box-shadow: 0 4px 15px rgba(66, 153, 225, 0.4);
+}
+
+.btn-secondary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(66, 153, 225, 0.6);
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #ed8936, #dd6b20);
+    color: white;
+    box-shadow: 0 4px 15px rgba(237, 137, 54, 0.4);
+}
+
+.btn-danger:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(237, 137, 54, 0.6);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.lap-section {
+    text-align: left;
+    background: #f7fafc;
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+}
+
+.lap-section h3 {
+    color: #4a5568;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.lap-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 10px;
+}
+
+.stat {
+    text-align: center;
+    padding: 0.5rem;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.8rem;
+    color: #718096;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.25rem;
+}
+
+.stat-value {
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+    color: #2d3748;
+    font-weight: 600;
+}
+
+.lap-list {
+    max-height: 300px;
+    overflow-y: auto;
+    background: white;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.lap-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    border-bottom: 1px solid #e2e8f0;
+    transition: background-color 0.2s ease;
+}
+
+.lap-item:last-child {
+    border-bottom: none;
+}
+
+.lap-item:hover {
+    background-color: #f7fafc;
+}
+
+.lap-item.best {
+    background-color: #c6f6d5;
+    color: #22543d;
+}
+
+.lap-item.worst {
+    background-color: #fed7d7;
+    color: #742a2a;
+}
+
+.lap-number {
+    font-weight: 600;
+    color: #4a5568;
+}
+
+.lap-time {
+    font-family: 'Courier New', monospace;
+    font-weight: 600;
+}
+
+.lap-diff {
+    font-size: 0.9rem;
+    color: #718096;
+    font-family: 'Courier New', monospace;
+}
+
+.no-laps {
+    text-align: center;
+    color: #a0aec0;
+    font-style: italic;
+    padding: 2rem;
+}
+
+.footer {
+    margin-top: 2rem;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+}
+
+.developer-name {
+    color: #ffd700;
+    font-weight: bold;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Scrollbar Styling */
+.lap-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.lap-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.lap-list::-webkit-scrollbar-thumb {
+    background: #cbd5e0;
+    border-radius: 3px;
+}
+
+.lap-list::-webkit-scrollbar-thumb:hover {
+    background: #a0aec0;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .stopwatch-container {
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .time {
+        font-size: 2.5rem;
+        letter-spacing: 1px;
+    }
+
+    .time-labels {
+        gap: 2rem;
+        font-size: 0.8rem;
+    }
+
+    .controls {
+        gap: 0.5rem;
+    }
+
+    .btn {
+        padding: 12px 20px;
+        font-size: 1rem;
+        min-width: 100px;
+    }
+
+    .lap-stats {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+
+    .lap-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .time {
+        font-size: 2rem;
+    }
+
+    .controls {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn {
+        width: 100%;
+        max-width: 200px;
+    }
+}

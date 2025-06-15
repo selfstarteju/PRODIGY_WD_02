@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch - Time Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="stopwatch-container">
+            <h1>Stopwatch</h1>
+            
+            <div class="time-display">
+                <div class="time" id="timeDisplay">00:00:00.00</div>
+                <div class="time-labels">
+                    <span>MM</span>
+                    <span>SS</span>
+                    <span>MS</span>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button class="btn btn-primary" id="startStopBtn">Start</button>
+                <button class="btn btn-secondary" id="lapBtn" disabled>Lap</button>
+                <button class="btn btn-danger" id="resetBtn" disabled>Reset</button>
+            </div>
+
+            <div class="lap-section" id="lapSection">
+                <h3>Lap Times</h3>
+                <div class="lap-stats" id="lapStats">
+                    <div class="stat">
+                        <span class="stat-label">Best Lap</span>
+                        <span class="stat-value" id="bestLap">--:--:--.--</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Worst Lap</span>
+                        <span class="stat-value" id="worstLap">--:--:--.--</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Average</span>
+                        <span class="stat-value" id="avgLap">--:--:--.--</span>
+                    </div>
+                </div>
+                <div class="lap-list" id="lapList">
+                    <div class="no-laps">No lap times recorded</div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>Developed by <span class="developer-name">Tejas Raju Awsare</span></p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
